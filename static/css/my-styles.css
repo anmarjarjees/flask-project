@@ -1,0 +1,51 @@
+/* This is our own CSS file (not from Bootstrap Starting templates) */
+
+hr {
+    border: 1px inset #a8a3a3;
+    width: 95%;
+}
+
+/* 
+And in there, we are going to target all <img> tags that are the children of col-md-5 of about.html page.
+*/
+
+.featurette {
+    border: 2px inset rgb(136, 135, 135);
+    padding: 3px;
+}
+
+/* 
+We can target only the images inside the div with class "col-md-5" for about page
+OR we can make it a general rule for all the images to be responsive 
+*/
+img {
+    /* 
+    To make our image responsive:
+    width: 100% => flexible to go larger and larger based on its container
+    max-width: 100% => the image will not beyond its actual pixels 
+
+    NOTE:
+    Don't forget to remove the attributes: width or height with the pixel values 
+    from the <img> element in case if you have them
+    */
+    width: 100%;
+    /* 
+    That'll make sure that the image fills the content nicely and doesn't overspill.
+    */
+}
+
+figure img {
+    display: block;
+    margin:auto;
+}
+
+figcaption {
+    text-align: center;
+    font-weight: bold;
+}
+
+.flashes {
+    background-color: rgb(240, 239, 236);
+    color: rgb(88, 85, 85);
+    font-style: italic;
+}

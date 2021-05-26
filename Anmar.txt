@@ -3,6 +3,9 @@ Dear all students,
 This folder contains the coding and the files as an outline, 
 or the path that I follow with my students based on Code Institute Lessons
 
+You can also check the progress or the steps of creating this app 
+by visiting: https://github.com/Code-Institute-Solutions/FlaskFramework
+
 Regards,
 Anmar Jarjees
 
