@@ -44,7 +44,7 @@
 
         However, I put for you the old original files:
         - "clean-blog.css" in case if you want to read it
-        - "clean-blog.css" in case if you want to use it
+        - "clean-blog-min.css" in case if you want to use it
 
         <link rel="stylesheet" href="{ { url_for('static',filename='css/clean-blog.min.css') } }">
     -->
@@ -160,11 +160,13 @@
     <!-- Main Content-->
     <!-- Below is the unique content for every page: -->
 
-    {% block content %}
-    <!-- 
+    <div class="container">
+        {% block content %}
+        <!-- 
                 the unique contents of every page goes here :-)
              -->
-    {% endblock %}
+        {% endblock %}
+    </div>
 
     <!-- Footer-->
     <footer class="border-top">

@@ -12,6 +12,7 @@ And in there, we are going to target all <img> tags that are the children of col
 .featurette {
     border: 2px inset rgb(136, 135, 135);
     padding: 3px;
+    margin: 5px;
 }
 
 /* 

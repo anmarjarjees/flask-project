@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+<!-- 
+  content is the name we give to our block by following the naming convention
+  let's put any random contents here just by copying the same content from the website: 
+-->
+{% block content %}
+<h2>Member Information</h2>
+<!-- for quick test -->
+<!-- { { member } } -->
+<h2>{{ member.name }}</h2>
+
+<p>{{ member.description }}</p>
+
+<figure>
+  <img src="{{ member.image_source }}" alt="member image">
+  <figcaption>{{ member.name }} Picture</figcaption>
+</figure>
+{% endblock %}

@@ -5,27 +5,230 @@
   let's put any random contents here just by copying the same content from the website: 
 -->
 {% block content %}
-<div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
-            <h2>{{ page_title }}</h2>
-            <p>
-                The formation of the group grew out of a meeting Gandalf had with Thorin in Bree which kindled Thorin's
-                interest in
-                recapturing his long lost family inheritance. (Thorin's grandfather had been the king of the Lonely
-                Mountain when
-                Smaug came and took it.) Remembering that he had once known an adventurous Hobbit on his travels in the
-                Shire,
-                Gandalf decided to add Bilbo to their company because he knew that stealth and cunning were preferable
-                to force.
-                Gandalf also believed that someone like Bilbo could keep the sometimes prideful and stubborn Dwarves
-                from rash
-                action. The superstitious Dwarves also considered thirteen to be an unlucky number, and as Gandalf had
-                planned to
-                leave on other business, welcomed a fourteenth to fill into their party.
-            </p>
-        </div>
+<h2>{{ page_title }}</h2>
+<p>
+    The formation of the group grew out of a meeting Gandalf had with Thorin in Bree which kindled Thorin's
+    interest in
+    recapturing his long lost family inheritance. (Thorin's grandfather had been the king of the Lonely
+    Mountain when
+    Smaug came and took it.) Remembering that he had once known an adventurous Hobbit on his travels in the
+    Shire,
+    Gandalf decided to add Bilbo to their company because he knew that stealth and cunning were preferable
+    to force.
+    Gandalf also believed that someone like Bilbo could keep the sometimes prideful and stubborn Dwarves
+    from rash
+    action. The superstitious Dwarves also considered thirteen to be an unlucky number, and as Gandalf had
+    planned to
+    leave on other business, welcomed a fourteenth to fill into their party.
+</p>
+
+<!-- We need to display the info of our JSON file "company.json" -->
+<!-- for testing -->
+<!-- { { company } } -->
+
+<!--               
+                
+                Because it's an array, I can refer to it using standard Python notation to access an array elements:
+                So I can put [0] to take the first element out of the array. 
+                And then we can put [name] to get the name field.                
+
+                the first element in the JSON file which is index 0 is about "Thorin Oakenshield" 
+                {
+                "name": "Thorin Oakenshield",
+                "description": "Thorin II, also called the Oakenshield, King under the Mountain or the Mountain King, was the son of Thráin II, the older brother of Frerin and Dís, the grandson of King Thrór and the uncle of Fíli and Kíli. Thorin was best known for his deeds as leader of a company that infiltrated the lost Kingdom under the Mountain to take it back from Smaug and for leading an alliance of Men, Dwarves, and Elves in the Battle of the Five Armies.",
+                "image_source": "http://www.panhistoria.com/Stacks/Novels/characterimages/T27293.jpg",
+                "url": "thorin"
+                }
+
+                code below will give us: Thorin Oakenshield
+            -->
+
+<p>The first member is {{ company[0]["name"] }}</p>
+<!-- OR using the object notation: -->
+<p>The first member is {{ company[0].name }}</p>
+<hr>
+
+<!-- 
+                Let's try to display the first three members without a loop first using ul:
+                the python varaible "company" is an array with JSON data inside as we practiced above
+             -->
+
+<!-- Thorin Oakenshield -->
+<!-- <ul>
+                <li>{ { company[0]["name"] } } </li>
+                <li>{ { company[0]["description"] } }</li>
+                <li><img src="{ { company[0]['image_source'] } }" alt="Thorin"></li>
+            </ul> -->
+
+<!-- Kili & Fili using the dot notation -->
+<!-- <ul>
+                <li>{ { company[1].name } } </li>
+                <li>{ { company[1].description } }</li>
+                <li>{ { company[1].image_source } }</li>
+            </ul> -->
+
+<!-- Ã“in -->
+<!-- <ul>
+                <li>{ { company[2]["name"] } } </li>
+                <li>{ { company[2]["description"] } }</li>
+                <li>{ { company[2]["image_source"] } }</li>
+            </ul> -->
+
+<!-- 
+                Now we wil try to generate the same layout of CI again without using for loop
+                Below is the original content for creating the layout template to be used in for loop later
+
+                Please be advised that images will not fit correctly and nicely inside the BS columns 
+                We need to fix them by adding our custom styles in our custom css file style.css inside "static" folder
+
+                To do that, we'll use Bootstrap classes: .row.featurette and then press tab.
+                so type: .row.featurette then "TAB" to get:
+                <div class="row featurette"></div>
+
+                Every row can have up to 12 columns:
+                we will use:
+                - 7 columns for the description 
+                - 5 columns for the image
+            -->
+
+
+<!-- 
+    <div class="row featurette">
+    <div class="col-md-7">
+        <h3>{ {company[0]["name"]} }</h3>
+        <p>{ {company[0]["description"]} }</p>
+    </div>
+    <div class="col-md-5">
+        <img src="{ {company[0]['image_source']} }" alt="Member Image">
     </div>
 </div>
+
+<div class="row featurette">
+    <div class="col-md-7">
+        <h3>{ {company[1]["name"]} }</h3>
+        <p>{ {company[1]["description"]} }</p>
+    </div>
+    <div class="col-md-5">
+        <img src="{ {company[1]['image_source']} }" alt="Member Image">
+    </div>
+</div> 
+-->
+
+<!-- 
+            When we create a for loop using the Jinja templating language, 
+            it also creates an object for us called "loop". 
+
+            And that object "loop" has a property which is .index
+
+            To use it: loop.index
+
+            the index property: shows us exactly which iteration of the loop we're on
+            and it counts from 1
+-->
+
+<!-- 
+   object can have properties with values:
+   object_name.property_name
+   member.name => return the name of the member
+   member.description => return the description
+   member.image_source => return the image
+
+   so instead of using member["name"] to get the value of the key "name"
+   we can also use member.name to get the value of the key "name"
+ -->
+
+<!-- 
+{ % for member in company % }
+    <div class="row featurette">
+    <div class="col-md-7">
+        <h3>{ {loop.index}}: { {member['name']} }</h3>
+        <h3>{ {member.name} }</h3>
+        <p>{ {member['description']} }</p>
+    </div>
+    <div class="col-md-5">
+        <img src="{ {member['image_source']} }" alt="Member Image">
+    </div>
+</div>
+{ % endfor % }
+-->
+
+
+<!-- 
+    case1: if the loop counter index value is odd: text on the left | image on the right
+    case2: if the loop counter index value is even: image on the left | text on the right
+
+    case1: div.col-md-7 | div.col-md-5 which means text left and image right
+    case2: div.col-md-5 | div.col-md-7 which means image right and text left
+
+    if condition:  
+    when the loop index is odd => the image on the right
+    when the loop index is even => the image on the left
+
+    to find if the number is odd or even, we need to check the remainder using this operation %
+    even number % 2 = 0
+    odd number % 2 != 0 
+-->
+
+<!-- below is the code template inside our for loop: -->
+<!-- { % if loop.index % 2 != 0 % } -->
+<!-- which means it's an odd number: -->
+<!-- text on the left and image on the right -->
+<!-- { % else % } -->
+<!-- image on the left and text on the right -->
+<!-- { % endif % } -->
+
+
+{% for member in company %}
+<div class="row featurette">
+    <!-- now we will apply the code template into our real html content -->
+    {% if loop.index % 2 != 0 %}
+    <div class="col-md-7">
+        <h3>
+            <!-- 
+                in Flask the value for href for any page link is just the route() URL value in our run.py
+
+                instead of typing a general link: href="about/member" 
+                we need to customize it: href="about/{{member['url']}}"
+                href="about/{{member['url']}}" == it means, we have a python varaible: member['url']
+
+                For examples: 
+                > The url: http://127.0.0.1:5000/about/thorin
+                > The url: http://127.0.0.1:5000/about/kili-and-fili 
+                > The url: http://127.0.0.1:5000/about/oin
+                
+                The conclusion:
+                The url: http://127.0.0.1:5000/about/<xyz>
+                <xyz> the change in the url
+                
+                this varaible needs to be passed to our function == we have ==> route('about/<member_url>')
+
+                inside the for loop, the varaible "member" will represent every member with all its properties in every iteration:
+                name": "the member name",
+                "description": "Describe the member role",
+                "image_source": "a link to an online image",
+                "url": "just a simple value (one word or with -) for the member's name"
+             -->
+            <a href="about/{{member['url']}}">{{loop.index}}: {{member['name']}}</a>
+        </h3>
+        <!-- <h3>{ {member.name} }</h3> -->
+        <p>{{member['description']}}</p>
+    </div>
+    <div class="col-md-5">
+        <img src="{{member['image_source']}}" alt="Member Image">
+    </div>
+    {% else %}
+    <div class="col-md-5">
+        <img src="{{member['image_source']}}" alt="Member Image">
+    </div>
+    <div class="col-md-7">
+        <h3>
+            <a href="about/{{member['url']}}">{{loop.index}}: {{member['name']}}</a>
+        </h3>
+        <p>{{member['description']}}</p>
+    </div>
+    {% endif %}
+</div>
+<hr>
+{% endfor %}
 
 {% endblock %}
